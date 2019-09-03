@@ -10,9 +10,6 @@
 * 期望城市：上海
 * 目前年收入 21 万元
 
-- 2014 架构师大会演讲：[如何通过 Docker 优化内部开发](http://ftqq.com)
-- 9 月公司内部分享：[云计算的前生今世](http://ftqq.com)
-
 ## 工作经历
 
 ### 上海友玩网络科技有限公司 （ 2016 年 4 月 ~ 2019 年 9 月 ）
@@ -104,6 +101,7 @@
 
 以下均为我熟练使用的技能
 
-- 前端：HTML5/CSS/Javascript
-- 前端工具：webpack/ts/rust 初级
-- 版本管理: Git
+前端语言：HTML5/CSS/Javascript/typescript
+前框架端：react+redux
+前端工具：webpack//rust(初级)
+版本管理: Git
