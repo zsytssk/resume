@@ -1,11 +1,31 @@
+## tpl
+
+```ts
+// let input:string[] = [];
+// rl.on('line', function (line) {
+//     input.push(line);
+// });
+// rl.on('close', () => {
+//    console.log( parseInput(input));
+// });
+```
+
 ## 2023-12-12 16:55:17
+
+- @note 解析数组
 
 - @ques nc149
   - 有多个 j 在运动，记录当前的 key,记录当前的位置 set ？map ？ {}
   - 还能怎么优化性能 -> 怎么获取参数
-  - 看 bili
+  - https://www.youtube.com/watch?v=af1oqpnH1vA
 
 ## end
+
+- @ques
+
+  - 如何把公式解析出来
+    - 先把最底层的解出来 -> 深度优先
+  - 矩阵的乘法公式
 
 - @ques leetcode 1839
 
@@ -25,7 +45,11 @@
   - 怎么用计算机去计算
 
 ```txt
-C(m,n)=A(m,n)/A(m,m)=(n!/(n-m)!)/m!= n!/((n-m)!
+<!-- 排列 -->
+C(m,n)=A(m,n)/A(m,m)=(n!/(n-m)!)/m!= n!/(n-m)!
+
+<!-- 组合 -->
+S(m,n)=A(m,n)/A(m,m)=(n!/(n-m)!)/m!= n!/((n-m)!m!)
 ```
 
 - @ques nc61 还能怎么优化？

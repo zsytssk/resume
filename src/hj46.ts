@@ -18,7 +18,7 @@
  * HJ46 截取字符串
  */
 
-function parseInput(input: string[]) {
+export function parseInput(input: string[]) {
   let str = input[0];
   let len = parseInt(input[1]);
 
