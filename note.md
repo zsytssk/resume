@@ -10,6 +10,16 @@
 // });
 ```
 
+## 2023-12-15 11:58:10
+
+- get array last
+- get array first
+- ***
+- `-?` 是做什么的
+- `-readonly` 是做什么的
+- filter readonly
+- 两个 record 共同的属性
+
 ## 2023-12-12 16:55:17
 
 - @note 解析数组
