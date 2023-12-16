@@ -5,6 +5,7 @@
   - 更新当前便利字符串的位置
   - ***
   - [匹配括号](./src/algorithm/hj52.ts)
+  - [括号嵌套](./src/algorithm/leetcode/1614.ts)
 
 - @note [合并区间](./src/algorithm/nc/nc37.ts)
 

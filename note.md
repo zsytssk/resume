@@ -1,3 +1,5 @@
+<!-- https://www.nowcoder.com/practice/eceb50e041ec40bd93240b8b3b62d221?tpId=196&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj&difficulty=&judgeStatus=&tags=&title=NC175&gioEnter=menu -->
+
 ## tpl
 
 ```ts
@@ -29,10 +31,16 @@
 
 ## 2023-12-16 15:07:10
 
+- @ques NC175 [合法的括号字符串](https://www.nowcoder.com/practice/eceb50e041ec40bd93240b8b3b62d221)
+  - 能不能碰到`*`直接把他当作三种可能一个个的去便利，只要最后有一个合法的就行了
+  - 这个逻辑怎么处理？
+  - ***
+  - 如果后面需要匹配前面这个（怎么处理 -> 应该是把 testStr 数据带入到 checkBranch 中
+  - 也许可以用到以前那个地图寻路的逻辑 -> 深度优先 | 广度优先
+
+### end
+
 - @ques NC52 有效括号序列
-
-### save
-
 
 ## typescipt
 
