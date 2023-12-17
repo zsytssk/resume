@@ -77,15 +77,7 @@ function parserArr(s: string, startIndex = 0) {
   return [res, endPos] as const;
 }
 
-parseInput(
-  `5
-23 61
-61 59
-59 34
-34 56
-56 35
-(A(((BC)D)E))`.split("\n")
-);
+console.log(parserArr(`(A(((BC)D)E))`));
 // parseInput(
 //   `3
 // 50 10
