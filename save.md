@@ -6,6 +6,7 @@
   - ***
   - [匹配括号](./src/algorithm/hj52.ts)
   - [括号嵌套](./src/algorithm/leetcode/1614.ts)
+  - [合法的括号字符串](src/algorithm/nc/nc175_2.ts)
 
 - @note [合并区间](./src/algorithm/nc/nc37.ts)
 
@@ -17,6 +18,7 @@
 
   - 排列 `n!/(n-m)!`
   - 组合 `n!/((n-m)！m!)`
+  - [有重复字符串的排列组合](./src/algorithm/leetcode/0808.ts)
 
 - @note [矩阵的乘法](./src/algorithm/hj70.ts)
 
