@@ -24,16 +24,18 @@ export function minWindow(S: string, T: string): string {
   }));
 
   while (true) {
-    let frameArr = getShortPath(loopArr, saveArr, completeArr, completeLen);
-    // console.log(`test:>completeLen`, {
-    //   len: loopArr.length,
-    // });
-    if (!frameArr.length) {
+    let stepArr = getShortPath(loopArr, saveArr, completeArr, completeLen);
+    console.log(`test:>completeLen`, {
+      loopLen: loopArr.length,
+      saveLen: saveArr.length,
+      completeLen: completeArr.length,
+    });
+    if (!stepArr.length && !saveArr.length) {
       break;
     }
 
     let tempArr = [] as FindItem[];
-    for (let item of loopArr) {
+    for (let item of stepArr) {
       let nextPos = item.pos + 1;
       let curRange = item.range;
       let nextChar = T[nextPos];
@@ -52,12 +54,17 @@ export function minWindow(S: string, T: string): string {
           len: getRangeLen(range),
         };
       });
-      //   console.log(`test:>nextArr`, nextArr);
+      // console.log(`test:>nextArr`, nextArr);
       tempArr.push(...nextArr);
     }
-    frameArr = tempArr;
+    loopArr.push(...tempArr);
   }
 
+  console.log(`test:>completeLen`, {
+    loopLen: loopArr.length,
+    saveLen: saveArr.length,
+    completeLen: completeArr.length,
+  });
   if (!completeArr.length) {
     return "";
   }
@@ -74,6 +81,18 @@ export function getShortPath(
   completeArr: FindItem[],
   sLen: number
 ) {
+  let maxLen = 1000;
+  if (loopArr.length > maxLen) {
+    let arr = loopArr.splice(maxLen);
+    saveArr.push(...arr);
+  }
+
+  if (loopArr.length === 0) {
+    let num = Math.min(maxLen, saveArr.length / 2);
+    let arr = saveArr.splice(num);
+    loopArr = arr;
+  }
+
   for (let i = loopArr.length - 1; i >= 0; i--) {
     let completeLen = completeArr[0]?.len ?? Infinity;
 
@@ -87,7 +106,7 @@ export function getShortPath(
     }
 
     // 超过范围的就不用处理了
-    if (completeLen !== Infinity && item.len > completeLen) {
+    if (item.len > completeLen) {
       loopArr.splice(i, 1);
       continue;
     }
@@ -142,8 +161,8 @@ function findPosMap(s: string, t: string) {
 
 console.time();
 let res = minWindow(
-  "rriswzrehwhvhbrzwkkogeuxsvfsipmzjwthxllfjtcsutrtfbhmidlcyruiiihrgdzdqkkzfnrcilvomecwjnyiguqpcaikdhovuaubnndyyyoleqhofiymcqdfqlpvvfqpgmqvawvywjlbbvrhdpvhfymyletglmxtyqpamkzkumlvhcemrzuzzixnoqvaevtflifzvejrrxoabtnvuhuwprjejgeobztokynffzyyymyzhluesoakflortuhvtclfabkhakfaxgzgrukmkmwszmjtgqqbubhucteeeledrejjawvkitckfnfnfvqzwxwbtcfznmcfqnqsjncughenwjaegqdeqbfldnktzmyrbojldnhjwnytyyzeqckigstlfdegrcztsigxxpgucepceoixssfakbmreqxyvytpibngqvcucrwihefbwncjooaugasbynthoinedryhkwqraxsxkwiamivtipwjdpqrxfwdywkitcztatsmsanelixvxweclwuldsqbocjhfkdhgxtyagclqciqynsllmyrgouvreeyqjfwhywjhbwxdepdtkofynyfdsauygspqznzykifleeqiwtcghjewhjazjwysrpiqchqorvzvcrfakjguskqzusbfp",
-  "zxgohysqphhm"
+  "chusviimasafkxqhrwilaczecdvkeathipbfzjtbdvgpszwlxezxgydlbaxgbsplhssjdlkghrwbssnpzonhmssptsxukmfugxdjknqrgotyiiohwdrkvlzqdxmolti",
+  "sslddavu"
 );
 console.log(res);
 console.timeEnd();
