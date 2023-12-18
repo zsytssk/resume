@@ -14,7 +14,7 @@ type State = {
   saveArr: FindItem[];
   loopArr: FindItem[];
   completeArr: FindItem[];
-  shortLen?: number;
+  shortLen: number;
 };
 
 export function minWindow(S: string, T: string): string {
@@ -29,6 +29,7 @@ export function minWindow(S: string, T: string): string {
       range: [item],
       len: 1,
     })),
+    shortLen: S.length,
   };
 
   while (true) {
@@ -97,7 +98,7 @@ export function getShortPath(state: State, sLen: number) {
   }
 
   for (let i = state.loopArr.length - 1; i >= 0; i--) {
-    let shortLen = state.shortLen ?? Infinity;
+    let shortLen = state.shortLen;
 
     let item = state.loopArr[i];
     if (item.pos === sLen - 1) {
