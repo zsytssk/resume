@@ -86,6 +86,7 @@ export function minWindow(S: string, T: string): string {
 
 export function getShortPath(state: State, sLen: number) {
   let maxLen = 1000;
+
   if (state.loopArr.length > maxLen) {
     let arr = state.loopArr.splice(maxLen);
     state.saveArr = state.saveArr.concat(arr);
