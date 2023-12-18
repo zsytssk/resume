@@ -10,27 +10,35 @@ type FindItem = {
   range: number[];
   len: number;
 };
+type State = {
+  saveArr: FindItem[];
+  loopArr: FindItem[];
+  completeArr: FindItem[];
+  shortLen?: number;
+};
 
 export function minWindow(S: string, T: string): string {
   let posMap = findPosMap(S, T);
   let completeLen = T.length;
 
-  let completeArr: FindItem[] = [];
-  let saveArr: FindItem[] = [];
-  let loopArr: FindItem[] = posMap[T[0]].map((item) => ({
-    pos: 0,
-    range: [item],
-    len: 1,
-  }));
+  let state: State = {
+    completeArr: [],
+    saveArr: [],
+    loopArr: posMap[T[0]].map((item) => ({
+      pos: 0,
+      range: [item],
+      len: 1,
+    })),
+  };
 
   while (true) {
-    let stepArr = getShortPath(loopArr, saveArr, completeArr, completeLen);
+    let stepArr = getShortPath(state, completeLen);
     console.log(`test:>completeLen`, {
-      loopLen: loopArr.length,
-      saveLen: saveArr.length,
-      completeLen: completeArr.length,
+      loopLen: state.loopArr.length,
+      saveLen: state.saveArr.length,
+      completeLen: state.completeArr.length,
     });
-    if (!stepArr.length && !saveArr.length) {
+    if (!stepArr.length && !state.saveArr.length) {
       break;
     }
 
@@ -57,78 +65,74 @@ export function minWindow(S: string, T: string): string {
       // console.log(`test:>nextArr`, nextArr);
       tempArr.push(...nextArr);
     }
-    loopArr.push(...tempArr);
+    state.loopArr = state.loopArr.concat(tempArr);
   }
 
   console.log(`test:>completeLen`, {
-    loopLen: loopArr.length,
-    saveLen: saveArr.length,
-    completeLen: completeArr.length,
+    loopLen: state.loopArr.length,
+    saveLen: state.saveArr.length,
+    completeLen: state.completeArr.length,
   });
-  if (!completeArr.length) {
+  if (!state.completeArr.length) {
     return "";
   }
-  let shortItem = completeArr[0];
+  let shortItem = state.completeArr[0];
   return S.substring(
     shortItem.range[0],
     shortItem.range[shortItem.range.length - 1] + 1
   );
 }
 
-export function getShortPath(
-  loopArr: FindItem[],
-  saveArr: FindItem[],
-  completeArr: FindItem[],
-  sLen: number
-) {
+export function getShortPath(state: State, sLen: number) {
   let maxLen = 1000;
-  if (loopArr.length > maxLen) {
-    let arr = loopArr.splice(maxLen);
-    saveArr.push(...arr);
+  if (state.loopArr.length > maxLen) {
+    let arr = state.loopArr.splice(maxLen);
+    state.saveArr = state.saveArr.concat(arr);
   }
 
-  if (loopArr.length === 0) {
-    let num = Math.min(maxLen, saveArr.length / 2);
-    let arr = saveArr.splice(num);
-    loopArr = arr;
+  if (state.loopArr.length === 0) {
+    let num = Math.min(maxLen, state.saveArr.length / 2);
+    let arr = state.saveArr.splice(num);
+    state.loopArr = arr;
   }
 
-  for (let i = loopArr.length - 1; i >= 0; i--) {
-    let completeLen = completeArr[0]?.len ?? Infinity;
+  for (let i = state.loopArr.length - 1; i >= 0; i--) {
+    let shortLen = state.shortLen ?? Infinity;
 
-    let item = loopArr[i];
+    let item = state.loopArr[i];
     if (item.pos === sLen - 1) {
-      if (item.len < completeLen) {
-        completeArr.unshift(item);
+      if (item.len < shortLen) {
+        state.completeArr.unshift(item);
+        state.shortLen = item.len;
       }
-      loopArr.splice(i, 1);
+      state.loopArr.splice(i, 1);
       continue;
     }
 
     // 超过范围的就不用处理了
-    if (item.len > completeLen) {
-      loopArr.splice(i, 1);
+    if (item.len > shortLen) {
+      state.loopArr.splice(i, 1);
       continue;
     }
   }
 
-  if (!loopArr.length) {
+  if (!state.loopArr.length) {
     return [];
   }
 
-  loopArr.sort((a, b) => {
+  state.loopArr.sort((a, b) => {
     return a.len - b.len;
   });
 
-  let minLen = loopArr[0].len;
+  let minLen = state.loopArr[0].len;
 
   let res = [] as FindItem[];
-  for (let i = loopArr.length - 1; i >= 0; i--) {
-    let item = loopArr[i];
+  for (let i = state.loopArr.length - 1; i >= 0; i--) {
+    let item = state.loopArr[i];
     let isShort = item.len === minLen;
     if (isShort) {
       res.push(item);
-      loopArr.splice(i, 1);
+      state.loopArr.splice(i, 1);
     }
   }
   return res;
@@ -160,6 +164,10 @@ function findPosMap(s: string, t: string) {
 }
 
 console.time();
+// let res = minWindow(
+//   "mspkqlcdmrwgrmcaytxilusinwgjvkdhfuuvfwarpxaglegjyftlblvqjezhqeovyisfgtxvqzdbdlmbthowumnfqomitbetlyzsrwpjvvkygycbfsyzgnfwbrhwunqilpadnrmkmzkvzowfhwgnjnmlftjbgzjtolwddlnrmymlmlsvhzltmzgtspvapetfqsjvfymrybelmxivwtokuueokbobhkgzerujqjcomgbadmxbhmociuquvhxereexvainlkcxsfxyrvzzjpbtjrqgynlrtpqrryedkiadqabhxcigslbdftkfhvxcmptdoagykjdajekgjsodgrgllqqulpwzfsdvsjtcszfddplojbrptyagqtaeiydnqgiksepmduqildxwfqmaqoghhilqiqfbxqlrucdzythlzgiexwepkmwuwjmeatfzjtqfxtewpohourutnajamhwiriotbwsnpismdxkunskhjedzeozsvvaofrhinzvcjoqpnbjavwjgcohjcgbadeokvytizomjeearhlrchdlkrstwbwwgamrxkkhkatvfavwhgqmqvzamrviutebutstfcbpcwmjwjigqyuittkhmfqhywkupcqvgrmkpbumkcuacokxhuevzwcatmwkqmhwfwjvxfjhhdkltuicpoxqlcsgqpshdafjwqevvpcesmpljzpyomqbqjjhabqddvozoswjhzobndowfdwvsnwiwhryihbmfqntkkculsxyyoxdrtyliwwgdnenvgbcypvkbzgmsemqujvlftzprvwwialfinjieetfgbtahhqbtlnagop",
+//   "zjlxtmibwxkfbraixbdx"
+// );
 let res = minWindow(
   "chusviimasafkxqhrwilaczecdvkeathipbfzjtbdvgpszwlxezxgydlbaxgbsplhssjdlkghrwbssnpzonhmssptsxukmfugxdjknqrgotyiiohwdrkvlzqdxmolti",
   "sslddavu"
