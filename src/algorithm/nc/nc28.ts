@@ -34,7 +34,8 @@ export function minWindow(S: string, T: string): string {
 
   while (true) {
     let stepArr = getShortPath(state, completeLen);
-    console.log(`test:>completeLen`, {
+    console.log(`test:>loop1`, {
+      stepLen: stepArr.length,
       loopLen: state.loopArr.length,
       saveLen: state.saveArr.length,
       completeLen: state.completeArr.length,
@@ -85,58 +86,67 @@ export function minWindow(S: string, T: string): string {
 }
 
 export function getShortPath(state: State, sLen: number) {
-  let maxLen = 1000;
-
+  let maxLen = 50000;
   if (state.loopArr.length > maxLen) {
+    state.loopArr.sort((a, b) => {
+      let diff1 = a.len - b.len;
+      if (diff1) {
+        return diff1;
+      }
+      return b.pos - a.pos;
+    });
     let arr = state.loopArr.splice(maxLen);
     state.saveArr = state.saveArr.concat(arr);
   }
 
   if (state.loopArr.length === 0) {
-    let num = Math.min(maxLen, state.saveArr.length / 2);
-    let arr = state.saveArr.splice(num);
+    let num = Math.min(maxLen, Math.ceil(state.saveArr.length / 10));
+    let arr = state.saveArr.splice(state.saveArr.length - num);
     state.loopArr = arr;
   }
 
-  for (let i = state.loopArr.length - 1; i >= 0; i--) {
+  state.loopArr = state.loopArr.filter((item) => {
     let shortLen = state.shortLen;
 
-    let item = state.loopArr[i];
     if (item.pos === sLen - 1) {
       if (item.len < shortLen) {
         state.completeArr.unshift(item);
         state.shortLen = item.len;
       }
-      state.loopArr.splice(i, 1);
-      continue;
+      return false;
     }
 
     // 超过范围的就不用处理了
     if (item.len > shortLen) {
-      state.loopArr.splice(i, 1);
-      continue;
+      return false;
     }
-  }
+    return true;
+  });
 
   if (!state.loopArr.length) {
     return [];
   }
 
   state.loopArr.sort((a, b) => {
-    return a.len - b.len;
+    let diff1 = a.len - b.len;
+    if (diff1) {
+      return diff1;
+    }
+    return b.pos - a.pos;
   });
 
   let minLen = state.loopArr[0].len;
+  let maxPos = state.loopArr[0].pos;
 
   let res = [] as FindItem[];
-  for (let i = state.loopArr.length - 1; i >= 0; i--) {
-    let item = state.loopArr[i];
-    let isShort = item.len === minLen;
+  state.loopArr = state.loopArr.filter((item) => {
+    let isShort = item.len === minLen && item.pos - maxPos < 10;
     if (isShort) {
       res.push(item);
-      state.loopArr.splice(i, 1);
     }
-  }
+    return !isShort;
+  });
+
   return res;
 }
 
@@ -166,13 +176,13 @@ function findPosMap(s: string, t: string) {
 }
 
 console.time();
-// let res = minWindow(
-//   "mspkqlcdmrwgrmcaytxilusinwgjvkdhfuuvfwarpxaglegjyftlblvqjezhqeovyisfgtxvqzdbdlmbthowumnfqomitbetlyzsrwpjvvkygycbfsyzgnfwbrhwunqilpadnrmkmzkvzowfhwgnjnmlftjbgzjtolwddlnrmymlmlsvhzltmzgtspvapetfqsjvfymrybelmxivwtokuueokbobhkgzerujqjcomgbadmxbhmociuquvhxereexvainlkcxsfxyrvzzjpbtjrqgynlrtpqrryedkiadqabhxcigslbdftkfhvxcmptdoagykjdajekgjsodgrgllqqulpwzfsdvsjtcszfddplojbrptyagqtaeiydnqgiksepmduqildxwfqmaqoghhilqiqfbxqlrucdzythlzgiexwepkmwuwjmeatfzjtqfxtewpohourutnajamhwiriotbwsnpismdxkunskhjedzeozsvvaofrhinzvcjoqpnbjavwjgcohjcgbadeokvytizomjeearhlrchdlkrstwbwwgamrxkkhkatvfavwhgqmqvzamrviutebutstfcbpcwmjwjigqyuittkhmfqhywkupcqvgrmkpbumkcuacokxhuevzwcatmwkqmhwfwjvxfjhhdkltuicpoxqlcsgqpshdafjwqevvpcesmpljzpyomqbqjjhabqddvozoswjhzobndowfdwvsnwiwhryihbmfqntkkculsxyyoxdrtyliwwgdnenvgbcypvkbzgmsemqujvlftzprvwwialfinjieetfgbtahhqbtlnagop",
-//   "zjlxtmibwxkfbraixbdx"
-// );
 let res = minWindow(
-  "chusviimasafkxqhrwilaczecdvkeathipbfzjtbdvgpszwlxezxgydlbaxgbsplhssjdlkghrwbssnpzonhmssptsxukmfugxdjknqrgotyiiohwdrkvlzqdxmolti",
-  "sslddavu"
+  "mspkqlcdmrwgrmcaytxilusinwgjvkdhfuuvfwarpxaglegjyftlblvqjezhqeovyisfgtxvqzdbdlmbthowumnfqomitbetlyzsrwpjvvkygycbfsyzgnfwbrhwunqilpadnrmkmzkvzowfhwgnjnmlftjbgzjtolwddlnrmymlmlsvhzltmzgtspvapetfqsjvfymrybelmxivwtokuueokbobhkgzerujqjcomgbadmxbhmociuquvhxereexvainlkcxsfxyrvzzjpbtjrqgynlrtpqrryedkiadqabhxcigslbdftkfhvxcmptdoagykjdajekgjsodgrgllqqulpwzfsdvsjtcszfddplojbrptyagqtaeiydnqgiksepmduqildxwfqmaqoghhilqiqfbxqlrucdzythlzgiexwepkmwuwjmeatfzjtqfxtewpohourutnajamhwiriotbwsnpismdxkunskhjedzeozsvvaofrhinzvcjoqpnbjavwjgcohjcgbadeokvytizomjeearhlrchdlkrstwbwwgamrxkkhkatvfavwhgqmqvzamrviutebutstfcbpcwmjwjigqyuittkhmfqhywkupcqvgrmkpbumkcuacokxhuevzwcatmwkqmhwfwjvxfjhhdkltuicpoxqlcsgqpshdafjwqevvpcesmpljzpyomqbqjjhabqddvozoswjhzobndowfdwvsnwiwhryihbmfqntkkculsxyyoxdrtyliwwgdnenvgbcypvkbzgmsemqujvlftzprvwwialfinjieetfgbtahhqbtlnagop",
+  "zjlxtmibwxkfbraixbdx"
 );
+// let res = minWindow(
+//   "chusviimasafkxqhrwilaczecdvkeathipbfzjtbdvgpszwlxezxgydlbaxgbsplhssjdlkghrwbssnpzonhmssptsxukmfugxdjknqrgotyiiohwdrkvlzqdxmolti",
+//   "sslddavu"
+// );
 console.log(res);
 console.timeEnd();
