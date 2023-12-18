@@ -19,6 +19,7 @@ export function minWindow(S: string, T: string): any {
       needs.set(T[i], 1);
     }
   }
+  console.log(needs.size);
   let left = 0,
     right = 0,
     len = Infinity,
