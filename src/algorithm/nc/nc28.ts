@@ -16,24 +16,23 @@ export function minWindow(S: string, T: string): string {
   let completeLen = T.length;
 
   let completeArr: FindItem[] = [];
-  let saveArr: FindItem[] = posMap[T[0]].map((item) => ({
+  let saveArr: FindItem[] = [];
+  let loopArr: FindItem[] = posMap[T[0]].map((item) => ({
     pos: 0,
     range: [item],
     len: 1,
   }));
 
-  let loopArr: FindItem[] = [];
   while (true) {
-    loopArr = getShortPath(saveArr, completeArr, completeLen);
+    let frameArr = getShortPath(loopArr, saveArr, completeArr, completeLen);
     // console.log(`test:>completeLen`, {
-    //   1: loopArr[0],
-    //   2: loopArr[loopArr.length - 1],
     //   len: loopArr.length,
     // });
-    if (!loopArr.length) {
+    if (!frameArr.length) {
       break;
     }
 
+    let tempArr = [] as FindItem[];
     for (let item of loopArr) {
       let nextPos = item.pos + 1;
       let curRange = item.range;
@@ -54,8 +53,9 @@ export function minWindow(S: string, T: string): string {
         };
       });
       //   console.log(`test:>nextArr`, nextArr);
-      saveArr.push(...nextArr);
+      tempArr.push(...nextArr);
     }
+    frameArr = tempArr;
   }
 
   if (!completeArr.length) {
@@ -69,46 +69,47 @@ export function minWindow(S: string, T: string): string {
 }
 
 export function getShortPath(
+  loopArr: FindItem[],
   saveArr: FindItem[],
   completeArr: FindItem[],
   sLen: number
 ) {
-  for (let i = saveArr.length - 1; i >= 0; i--) {
+  for (let i = loopArr.length - 1; i >= 0; i--) {
     let completeLen = completeArr[0]?.len ?? Infinity;
 
-    let item = saveArr[i];
+    let item = loopArr[i];
     if (item.pos === sLen - 1) {
       if (item.len < completeLen) {
         completeArr.unshift(item);
       }
-      saveArr.splice(i, 1);
+      loopArr.splice(i, 1);
       continue;
     }
 
     // 超过范围的就不用处理了
     if (completeLen !== Infinity && item.len > completeLen) {
-      saveArr.splice(i, 1);
+      loopArr.splice(i, 1);
       continue;
     }
   }
 
-  if (!saveArr.length) {
+  if (!loopArr.length) {
     return [];
   }
 
-  saveArr.sort((a, b) => {
+  loopArr.sort((a, b) => {
     return a.len - b.len;
   });
 
-  let minLen = saveArr[0].len;
+  let minLen = loopArr[0].len;
 
   let res = [] as FindItem[];
-  for (let i = saveArr.length - 1; i >= 0; i--) {
-    let item = saveArr[i];
+  for (let i = loopArr.length - 1; i >= 0; i--) {
+    let item = loopArr[i];
     let isShort = item.len === minLen;
     if (isShort) {
       res.push(item);
-      saveArr.splice(i, 1);
+      loopArr.splice(i, 1);
     }
   }
   return res;
