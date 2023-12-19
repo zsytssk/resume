@@ -3,16 +3,14 @@
 ## tpl
 
 ```ts
-// let input:string[] = [];
-// rl.on('line', function (line) {
-//     input.push(line);
-// });
-// rl.on('close', () => {
-//    console.log( parseInput(input));
-// });
-// export function parseInput(input: string[]) {
-
-// }
+let input: string[] = [];
+rl.on("line", function (line) {
+  input.push(line);
+});
+rl.on("close", () => {
+  console.log(parseInput(input));
+});
+export function parseInput(input: string[]) {}
 ```
 
 - @ques nc149
@@ -52,6 +50,7 @@
   - 如何去穷举
   - ***
   - 性能问题如何优化
+    - loop
 
 - @ques chrome 录屏 linux
 
