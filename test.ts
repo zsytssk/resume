@@ -1,11 +1,3 @@
-class A {
-  private a = 1;
-  protected b = 1;
-  public c = 1;
-}
-
-class B extends A {
-  public test() {
-    this.b = 1;
-  }
-}
+let a = new Map();
+a.set("1,1", 0);
+console.log(a.get("1,1"));
