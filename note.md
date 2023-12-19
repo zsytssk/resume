@@ -10,6 +10,9 @@
 // rl.on('close', () => {
 //    console.log( parseInput(input));
 // });
+// export function parseInput(input: string[]) {
+
+// }
 ```
 
 - @ques nc149
