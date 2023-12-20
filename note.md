@@ -13,6 +13,12 @@ rl.on("close", () => {
 export function parseInput(input: string[]) {}
 ```
 
+- @ques 动态规划
+
+  - [什么是动态规划](https://www.zhihu.com/question/23995189/answer/305426560)
+  - 自己写一个实现
+  - [寻路如何写](https://pica.zhimg.com/80/v2-38e9a487997d2eea979097fbc9e9e674_720w.webp?source=1def8aca)
+
 - @ques nc149
 
   - 有多个 j 在运动，记录当前的 key,记录当前的位置 set ？map ？ {}
@@ -38,18 +44,19 @@ export function parseInput(input: string[]) {}
   - 深度搜索
 
 - @ques [hj41](src/algorithm/hj41_2.ts)
-
   - 从最小值开始一个个的累加
 
 ## 2023-12-17 18:17:42
 
-- @ques 动态规划 是什么意思
+- @ques leetcode 200
+  - 穷举所有是 1 的
+  - 记录所有寻到的位置
+  - 记录岛的位置
 
-  - 寻路怎么用动态规划
-  - ***
-  - 贪心 == 尽量使接下来面对的 w 更小
+### end
 
 - leet code 322
+
   - 几个小数累计加在一起 怎么处理？
   - 最大的数一定比最小的数小吗？
   - 能不能用寻路的逻辑处理？
@@ -60,7 +67,13 @@ export function parseInput(input: string[]) {}
   - ***
   - 当我每一次试的时候 就知道 怎么拿剩下的?
 
-### end
+- @ques 动态规划 是什么意思
+
+  - 自己写一个
+  - 寻路怎么用动态规划
+  - ***
+  - 贪心 == 尽量使接下来面对的 w 更小
+  - [什么是动态规划](https://www.zhihu.com/question/23995189/answer/305426560)
 
 - @ques hj43 寻路
 
