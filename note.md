@@ -43,6 +43,15 @@ export function parseInput(input: string[]) {}
 
 ## 2023-12-17 18:17:42
 
+- @ques hj43 寻路
+  - 只要一直往前就可以了
+  - 寻路中存在多个怎么处理
+    - 递归？
+
+### end
+
+- @ques chrome 录屏 linux
+
 - @ques leetcode204
 
   - 穷举所有的奇数
@@ -51,10 +60,6 @@ export function parseInput(input: string[]) {}
   - ***
   - 性能问题如何优化
     - loop
-
-- @ques chrome 录屏 linux
-
-### end
 
 - @ques leetcode 994
 

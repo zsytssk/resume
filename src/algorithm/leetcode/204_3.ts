@@ -6,7 +6,7 @@ export function countPrimes(n: number): number {
   const buffer = new ArrayBuffer(n);
   const arr = new Uint8Array(buffer);
   let count = 0;
-  for (let i = 3; i < n; i += 2) {
+  for (let i = 2; i < n; i += 1) {
     if (!arr[i]) {
       ++count;
       for (let j = i * i; j < n; j += i) {
