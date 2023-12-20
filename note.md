@@ -13,6 +13,8 @@ rl.on("close", () => {
 export function parseInput(input: string[]) {}
 ```
 
+- https://leetcode.cn/problems/shortest-path-visiting-all-nodes/
+
 - @ques 动态规划
 
   - [什么是动态规划](https://www.zhihu.com/question/23995189/answer/305426560)
@@ -48,12 +50,19 @@ export function parseInput(input: string[]) {}
 
 ## 2023-12-17 18:17:42
 
+- @ques 动态规划
+
+  - [什么是动态规划](https://www.zhihu.com/question/23995189/answer/305426560)
+  - 自己写一个实现
+  - [寻路如何写](https://pica.zhimg.com/80/v2-38e9a487997d2eea979097fbc9e9e674_720w.webp?source=1def8aca)
+
+### end
+
 - @ques leetcode 200
+
   - 穷举所有是 1 的
   - 记录所有寻到的位置
   - 记录岛的位置
-
-### end
 
 - leet code 322
 

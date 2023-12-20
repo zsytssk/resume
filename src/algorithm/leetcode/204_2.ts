@@ -17,5 +17,5 @@ export function countPrimes(n: number): number {
 }
 
 console.time();
-console.log(countPrimes(499979));
+console.log(countPrimes(49999));
 console.timeEnd();

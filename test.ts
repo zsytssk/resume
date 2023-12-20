@@ -1,3 +1,29 @@
-console.log(`test:>`, /[A-Z]/.test("O"));
-/* yuUX39iX93sPRrSOl0e2r4oKw4PuGx0u74aot0ZgrQaT9BY5NN404E2Se15x9bRdGE2d4425iG75H4Alx169
-a4vvhI45UT61fYqIZ6I4 */
+export function coinChange(coins: number[], amount: number): number {
+  let map = Array(amount + 1);
+  function loopFn(n: number) {
+    if (map[n]) {
+      return map[n];
+    }
+    if (n === 0) {
+      return 0;
+    }
+    let arr: number[] = [];
+    for (let coin of coins) {
+      if (coin <= n) {
+        arr.push(loopFn(n - coin) + 1);
+      }
+    }
+    let res = Infinity;
+    if (arr.length) {
+      res = Math.min(...arr);
+    }
+    map[n] = res;
+    return res;
+  }
+  let res = loopFn(amount);
+  return res === Infinity ? -1 : res;
+}
+
+console.time();
+console.log(coinChange([1, 2, 5], 100));
+console.timeEnd();
