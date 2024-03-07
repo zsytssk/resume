@@ -17,7 +17,6 @@ type ReadonlyDemo = { x: number; y: string };
 type ReadonlyTest = MyReadonly<ReadonlyDemo>;
 
 // filter
-
 type FilterDemo = { x: number; y: string; z: string; readonly t: number };
 type FilterKeys<T, S> = {
   [key in keyof T]: T[key] extends S ? key : never;
