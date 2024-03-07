@@ -48,6 +48,16 @@ export function parseInput(input: string[]) {}
 - @ques [hj41](src/algorithm/hj41_2.ts)
   - 从最小值开始一个个的累加
 
+## 2024-01-03 10:58:26
+
+服务器正向代理和反向代理的区别
+前端性能优化 说出三个方面 负载均衡 资源压缩 内存还礼 webpack 打包优化
+chrome 的内存泄流问题如何解决 三种模式的区别
+webpack 打包从什么方向入手， 分包策略
+为前端技术的优缺点：乾坤+webpack federation 的区别
+前端检测技术 selenium cypress
+跨域页面如何实现 session 共享
+
 ## 2023-12-17 18:17:42
 
 - @ques 动态规划
