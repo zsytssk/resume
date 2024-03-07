@@ -1,5 +1,10 @@
 <!-- https://www.nowcoder.com/practice/eceb50e041ec40bd93240b8b3b62d221?tpId=196&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj&difficulty=&judgeStatus=&tags=&title=NC175&gioEnter=menu -->
 
+## 2024-03-07 14:45:58
+
+- @ques 这是什么公司的工作，我具体是做什么的，在什么地方
+- @ques 工作的环境是怎样的，多少人的团队，后端技术是什么？
+
 ## tpl
 
 ```ts
