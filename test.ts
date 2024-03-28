@@ -21,6 +21,7 @@ export function coinChange(coins: number[], amount: number): number {
     return res;
   }
   let res = loopFn(amount);
+  console.log(`test:>`, map);
   return res === Infinity ? -1 : res;
 }
 
