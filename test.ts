@@ -1,30 +1,81 @@
-export function coinChange(coins: number[], amount: number): number {
-  let map = Array(amount + 1);
-  function loopFn(n: number) {
-    if (map[n]) {
-      return map[n];
-    }
-    if (n === 0) {
-      return 0;
-    }
-    let arr: number[] = [];
-    for (let coin of coins) {
-      if (coin <= n) {
-        arr.push(loopFn(n - coin) + 1);
-      }
-    }
-    let res = Infinity;
-    if (arr.length) {
-      res = Math.min(...arr);
-    }
-    map[n] = res;
-    return res;
-  }
-  let res = loopFn(amount);
-  console.log(`test:>`, map);
-  return res === Infinity ? -1 : res;
+let a = [
+  1,
+  2,
+  [1, 2, 3],
+  { x: 1, y: 2 },
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  4,
+  5,
+  6,
+];
+let b = [
+  // 1,
+  2,
+  [1, 2, 3],
+  { x: 1, y: 2 },
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+  4,
+  5,
+  6,
+];
+
+const num = 1000;
+console.log(`diff1:>`, diff1(a, b));
+console.time("diff1");
+for (let i = 0; i < num; i++) {
+  const res = diff1(a, b);
+}
+console.timeEnd("diff1");
+
+console.log(`diff2:>`, diff2(a, b));
+console.time("diff2");
+for (let i = 0; i < num; i++) {
+  diff2(a, b);
+}
+console.timeEnd("diff2");
+
+function diff1(obj1, obj2) {
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
 
-console.time();
-console.log(coinChange([1, 2, 5], 100));
-console.timeEnd();
+function diff2(obj1, obj2) {
+  if (obj1.length != obj2.length) {
+    return false;
+  }
+  for (let i = 0; i < obj1.length; i++) {
+    if (!diff2(obj1[i], obj2[i])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// js比较性能
