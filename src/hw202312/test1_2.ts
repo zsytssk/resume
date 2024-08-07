@@ -29,17 +29,18 @@ export function parseInput(input: string[]) {
 function parseK(k: number, m: number) {
   let res: number[] = [];
   let i = 0;
+  let rest = k;
   while (true) {
-    if (k < Math.pow(m, i)) {
+    const curScope = Math.pow(m, i);
+    if (rest < curScope) {
       break;
     }
-    let rest = k % Math.pow(m, i);
-    let curRest = (k - rest) % Math.pow(m, i + 1);
-    let curNum = curRest / Math.pow(m, i);
+    let curRest = rest % (curScope * m);
+    let curNum = curRest / curScope;
+    rest = rest - curRest;
     res.push(curNum);
     i++;
   }
   return res.reverse().join("");
 }
-console.log(parseK(10, 10));
-// console.log(parseInput(["10 10 10"]));
+console.log(parseK(20, 16));

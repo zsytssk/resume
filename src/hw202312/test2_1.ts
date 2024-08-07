@@ -35,5 +35,5 @@ function splitStr(str: string) {
   // console.log(res);
   return res;
 }
-// console.log(splitStr(`99110*20*19*20*11`));
-console.log(parseInput(["20*19*20*"]));
+console.log(splitStr(`99110*20*19*20*11`));
+// console.log(parseInput(["20*19*20*"]));

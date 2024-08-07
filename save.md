@@ -1,3 +1,18 @@
+## tpl
+
+```ts
+let input: string[] = [];
+rl.on("line", function (line) {
+  input.push(line);
+});
+rl.on("close", () => {
+  console.log(parseInput(input));
+});
+export function parseInput(input: string[]) {}
+```
+
+## save
+
 - @note [解析数组](./src/algorithm/hj70.ts)
 
   - `(A(B(CD)))`

@@ -1,5 +1,32 @@
 <!-- https://www.nowcoder.com/practice/eceb50e041ec40bd93240b8b3b62d221?tpId=196&rp=1&ru=%2Fexam%2Foj&qru=%2Fexam%2Foj&sourceUrl=%2Fexam%2Foj&difficulty=&judgeStatus=&tags=&title=NC175&gioEnter=menu -->
 
+## 2024-08-06 15:24:43
+
+- @todo https://www.nowcoder.com/discuss/353159031504183296
+  - 复习下 pick(n, m)
+
+## 2024-07-29 15:42:08
+
+- @ques 动态规划
+
+  - [什么是动态规划](https://www.zhihu.com/question/23995189/answer/305426560)
+  - 自己写一个实现
+  - [寻路如何写](https://pica.zhimg.com/80/v2-38e9a487997d2eea979097fbc9e9e674_720w.webp?source=1def8aca)
+
+## 2024-08-05 19:11:48
+
+- @ques 如何计算字符串重复
+
+## 2024-07-29 15:11:05
+
+- @ques 16 进制如何处理
+
+- @note 年纪大了, 思维不像年轻人那么集中和灵活了
+
+  - 有没有更简单的思维方式
+
+- 速度太慢了
+
 ## 2024-03-28 14:07:01
 
 https://svga.dev/integrated.html

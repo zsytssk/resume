@@ -1,81 +1,31 @@
-let a = [
-  1,
-  2,
-  [1, 2, 3],
-  { x: 1, y: 2 },
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  4,
-  5,
-  6,
-];
-let b = [
-  // 1,
-  2,
-  [1, 2, 3],
-  { x: 1, y: 2 },
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  [1, 2, 3],
-  4,
-  5,
-  6,
-];
-
-const num = 1000;
-console.log(`diff1:>`, diff1(a, b));
-console.time("diff1");
-for (let i = 0; i < num; i++) {
-  const res = diff1(a, b);
-}
-console.timeEnd("diff1");
-
-console.log(`diff2:>`, diff2(a, b));
-console.time("diff2");
-for (let i = 0; i < num; i++) {
-  diff2(a, b);
-}
-console.timeEnd("diff2");
-
-function diff1(obj1, obj2) {
-  return JSON.stringify(obj1) === JSON.stringify(obj2);
-}
-
-function diff2(obj1, obj2) {
-  if (obj1.length != obj2.length) {
-    return false;
+export function parseInput(input: string[]) {
+  input.pop();
+  for (let item of input) {
+    console.log(parseNum(item));
   }
-  for (let i = 0; i < obj1.length; i++) {
-    if (!diff2(obj1[i], obj2[i])) {
-      return false;
-    }
-  }
-  return true;
 }
 
-// js比较性能
+const extraChar = {
+  A: 10,
+  B: 11,
+  C: 12,
+  D: 13,
+  E: 14,
+  F: 15,
+};
+function parseNum(num: string) {
+  const numStr = num.substring(2);
+  let len = numStr.length;
+  let sum = 0;
+  for (let i = 0; i < len; i++) {
+    let curScope = Math.pow(16, i);
+    let curStr = numStr[len - 1 - i];
+    let curNum = extraChar[curStr] ? extraChar[curStr] : curStr;
+    curNum = Number(curNum);
+    sum += curNum * curScope;
+  }
+
+  return sum;
+}
+
+console.log(parseNum(`0x1`));
