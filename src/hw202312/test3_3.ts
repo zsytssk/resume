@@ -3,7 +3,7 @@ export function parseInput(input: string[]) {
   let rawList = input.splice(1).map((item) => item.split(" ").map(Number));
   let flatList = flatArr(rawList);
   let arr1 = pickNum(flatList, n, m).sort((a, b) => {
-    return a[0] + a[1] + a[2] - (b[0] + b[1] + b[2]);
+    return sum(a) - sum(b);
   });
 
   return arr1[0][k];
@@ -44,11 +44,19 @@ function canMatch(pickList: number[], y: number, m: number) {
       return false;
     }
     // 同行
-    if (Math.floor(y / m) - Math.floor(x / m) === 0) {
+    if (y - x < m) {
       return false;
     }
   }
   return true;
+}
+
+function sum(arr: number[]) {
+  let sum = 0;
+  for (let item of arr) {
+    sum += item;
+  }
+  return sum;
 }
 
 function flatArr(arr: number[][]) {

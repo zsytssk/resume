@@ -1,4 +1,4 @@
-// https://www.nowcoder.com/practice/6a7b2b6c9e3a4f56b1db9f8ca08d889b
+// https://www.nowcoder.com/practice/fd55637d3f24484e96dad9e992d3f62e?tab=note
 // 背包
 // 性能不行
 export function parseInput(input: string[]) {
